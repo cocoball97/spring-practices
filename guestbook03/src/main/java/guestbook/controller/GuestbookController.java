@@ -1,7 +1,5 @@
 package guestbook.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +19,25 @@ public class GuestbookController {
 	}
 	
 	@RequestMapping("/")
-	public String index(Model model) {
-		List<GuestbookVo> list = guestbookRepository.findAll();
-		model.addAttribute("list", list);
-		return "index";		
+	public String index(/*HttpServletRequest request,*/ Model model) {
+		/*
+		ServletContext sc = request.getServletContext();
+		Enumeration<String> e = sc.getAttributeNames();
+		while(e.hasMoreElements()) {
+			String name = e.nextElement();
+			System.out.println(name);
+		}
+		ApplicationContext ac1 = (ApplicationContext)sc.getAttribute("org.springframework.web.context.WebApplicationContext.ROOT");
+		ApplicationContext ac2 = (ApplicationContext)sc.getAttribute("org.springframework.web.servlet.FrameworkServlet.CONTEXT.spring");
+		GuestbookRepository repository = ac1.getBean(GuestbookRepository.class);
+		System.out.println(repository);
+		GuestbookController controller = ac2.getBean(GuestbookController.class);
+		System.out.println(controller);
+		System.out.println(ac1 == ac2);
+		*/
+		
+		model.addAttribute("list", guestbookRepository.findAll());
+		return "index";
 	}
 	
 	@RequestMapping("/add")
@@ -33,17 +46,16 @@ public class GuestbookController {
 		return "redirect:/";
 	}
 	
-	// @PathVariable 통해 추출한 값은 jsp에서 사용할 수 있도록 request scope에 저장
-	@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public String delete(@PathVariable("id") Long id) {
-		return "delete";		
+		return "delete";
 	}
 	
-	@RequestMapping(value="/delete/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.POST)
 	public String delete(
-			@PathVariable("id") Long id,
-			@RequestParam(value="password", required=true, defaultValue="") String password) {
-			guestbookRepository.deleteByIdAndPassword(id, password);
-			return "redirect:/";
+		@PathVariable("id") Long id,
+		@RequestParam(value="password", required=true, defaultValue="") String password) {
+		guestbookRepository.deleteByIdAndPassword(id, password);
+		return "redirect:/";
 	}
 }
