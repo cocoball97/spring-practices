@@ -10,13 +10,11 @@
 </head>
 <body>
 	<h1>Upload completed</h1>
-
 	<div class="result-images">
-		<img src="${pageContext.request.contextPath }${url }" style="width:150px"><br>
+		<img src="${pageContext.request.contextPath }${url }" style="width:150px">
 	</div>
 	<p>
 		<a href='${pageContext.request.contextPath }'>업로드</a>
 	</p>
-	
 </body>
 </html>

@@ -9,6 +9,7 @@
 	</parent>
 	<artifactId>fileupload</artifactId>
 	<packaging>war</packaging>
+	
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<maven.compiler.source>21</maven.compiler.source>
@@ -17,16 +18,8 @@
 	</properties>
 
 	<dependencies>
-
-		<!-- Spring Context -->
+		<!-- Spring MVC -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springFramework-version}</version>
-		</dependency>
-
-		<dependency>
-			<!-- Spring MVC -->
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springFramework-version}</version>

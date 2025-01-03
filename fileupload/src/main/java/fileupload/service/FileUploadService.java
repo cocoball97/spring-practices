@@ -30,7 +30,9 @@ public class FileUploadService {
 			// Optional.of() 이것도 팩토리 메서드네?
 			// .orElse 가 없으면 리턴값이 optional 객체기 때문에 에러
 			String originFilename = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+			// 확장자
 			String extName = originFilename.substring(originFilename.lastIndexOf('.') + 1);
+			// 시간기반 파일명생성
 			String saveFilename = generateSaveFilename(extName);
 			long fileSize = file.getSize();
 			
@@ -38,8 +40,8 @@ public class FileUploadService {
 			System.out.println(saveFilename);
 			System.out.println(fileSize);
 			
+			// 파일저장
 			byte[] data = file.getBytes();
-			
 			OutputStream os =  new FileOutputStream(SAVE_PATH + "/" + saveFilename);
 			os.write(data);
 			os.close();

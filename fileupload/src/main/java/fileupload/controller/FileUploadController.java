@@ -29,6 +29,7 @@ public class FileUploadController {
 		Model model) {
 		
 		String url = fileUploadService.restore(file);
+		// model 이 매핑경로 전달
 		model.addAttribute("url",url);
 		return "result";
 	}
