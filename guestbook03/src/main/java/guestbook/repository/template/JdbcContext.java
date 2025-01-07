@@ -19,6 +19,8 @@ private DataSource dataSource;
 		this.dataSource = dataSource;
 	}
 	
+	// select 해서 결과값 반환
+	// RowMapper : row 값을 객체로 매핑
 	public <E> List<E> queryForList(String sql, RowMapper<E> rowMapper) {
 		return queryForListWithStatementStrategy(new StatementStrategy() {
 			@Override
@@ -28,7 +30,7 @@ private DataSource dataSource;
 		}, rowMapper);
 	}
 	
-	// 파라미터 바인딩을 위해
+	// delete, update 등 수행
 	public int excuteUpdate(String sql, Object[] parameters) {
 		return executeUpdateWithStatementStrategy(new StatementStrategy() {
 			@Override
@@ -44,6 +46,7 @@ private DataSource dataSource;
 		});
 	}
 	
+	// 값을 가져오는 함수
 	private <E> List<E> queryForListWithStatementStrategy(StatementStrategy statementStrategy, RowMapper<E> rowMapper) throws RuntimeException {
 		List<E> result = new ArrayList<>();
 		
@@ -63,6 +66,7 @@ private DataSource dataSource;
 		return result;
 	}
 	
+	// 결과 개수 카운트
 	private int executeUpdateWithStatementStrategy(StatementStrategy statementStrategy) throws RuntimeException {		
 		int count = 0;
 		
